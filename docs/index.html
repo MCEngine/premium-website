@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MCEnginePremiumApi Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #eee;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00d8ff;
+    }
+    .block {
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .block h2 {
+      color: #00ffae;
+    }
+    code {
+      background: #2c2c2c;
+      padding: 10px;
+      display: block;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 MCEnginePremiumApi Usage</h1>
+
+  <div class="block">
+    <h2>🔧 Initialization</h2>
+    <p>Creates the API instance. Automatically chooses database (MySQL or SQLite) from <code>config.yml</code>.</p>
+    <code>
+Plugin plugin = ...;<br>
+MCEnginePremiumApi api = new MCEnginePremiumApi(plugin);
+    </code>
+  </div>
+
+  <div class="block">
+    <h2>🔗 Get API Instance</h2>
+    <p>Retrieves the singleton instance of the API.</p>
+    <code>
+MCEnginePremiumApi api = MCEnginePremiumApi.getApi();
+    </code>
+  </div>
+
+  <div class="block">
+    <h2>📦 Get Plugin Reference</h2>
+    <p>Returns the associated plugin object.</p>
+    <code>
+Plugin plugin = api.getPlugin();
+    </code>
+  </div>
+
+  <div class="block">
+    <h2>💾 Get Database Implementation</h2>
+    <p>Access the active database connection (MySQL/SQLite) implementing <code>IMCEnginePremiumApiDB</code>.</p>
+    <code>
+IMCEnginePremiumApiDB db = api.getDB();
+    </code>
+  </div>
+
+  <div class="block">
+    <h2>🆕 Create Premium Rank Table</h2>
+    <p>Initializes the table if it doesn't exist. Supports types like <code>"vip"</code>, <code>"vvip"</code>, <code>"mvp"</code>, etc.</p>
+    <code>
+api.createPremiumRank("vip");
+api.createPremiumRank("vvip");
+    </code>
+  </div>
+
+  <div class="block">
+    <h2>🔍 Get Player's Premium Rank</h2>
+    <p>Returns the numeric rank of a player for a specific rank type.</p>
+    <code>
+String uuid = "player-uuid";<br>
+int vipRank = api.getPremiumRank(uuid, "vip");<br>
+int vvipRank = api.getPremiumRank(uuid, "vvip");
+    </code>
+  </div>
+
+  <div class="block">
+    <h2>⬆️ Upgrade Player's Rank</h2>
+    <p>Increases the player's rank by 1 in the given rank type.</p>
+    <code>
+api.upgradePremiumRank("player-uuid", "vip");<br>
+api.upgradePremiumRank("player-uuid", "vvip");
+    </code>
+  </div>
+
+</body>
+</html>
