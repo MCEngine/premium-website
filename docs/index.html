@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MCEnginePremiumApi Documentation</title>
+  <title>MCEnginePremiumApi – Rank Usage</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #121212;
       color: #eee;
       padding: 20px;
+      line-height: 1.6;
     }
     h1 {
       text-align: center;
@@ -32,59 +33,32 @@
       border-radius: 5px;
       overflow-x: auto;
       margin-top: 10px;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
 
-  <h1>📘 MCEnginePremiumApi Usage</h1>
+  <h1>👑 MCEnginePremiumApi – Rank Management</h1>
 
   <div class="block">
-    <h2>🔧 Initialization</h2>
-    <p>Creates the API instance. Automatically chooses database (MySQL or SQLite) from <code>config.yml</code>.</p>
+    <h2>🆕 createPremiumRank(String rankType)</h2>
+    <p>Creates a new premium rank table if it doesn't exist.</p>
+    <p><strong>Usage:</strong></p>
     <code>
-Plugin plugin = ...;<br>
-MCEnginePremiumApi api = new MCEnginePremiumApi(plugin);
+MCEnginePremiumApi api = MCEnginePremiumApi.getApi();<br>
+api.createPremiumRank("vip");<br>
+api.createPremiumRank("vvip");<br>
+api.createPremiumRank("mvp");
     </code>
   </div>
 
   <div class="block">
-    <h2>🔗 Get API Instance</h2>
-    <p>Retrieves the singleton instance of the API.</p>
+    <h2>🔍 getPremiumRank(String uuid, String rankType)</h2>
+    <p>Returns the current rank level of the player (or <code>-1</code> if not found).</p>
+    <p><strong>Usage:</strong></p>
     <code>
-MCEnginePremiumApi api = MCEnginePremiumApi.getApi();
-    </code>
-  </div>
-
-  <div class="block">
-    <h2>📦 Get Plugin Reference</h2>
-    <p>Returns the associated plugin object.</p>
-    <code>
-Plugin plugin = api.getPlugin();
-    </code>
-  </div>
-
-  <div class="block">
-    <h2>💾 Get Database Implementation</h2>
-    <p>Access the active database connection (MySQL/SQLite) implementing <code>IMCEnginePremiumApiDB</code>.</p>
-    <code>
-IMCEnginePremiumApiDB db = api.getDB();
-    </code>
-  </div>
-
-  <div class="block">
-    <h2>🆕 Create Premium Rank Table</h2>
-    <p>Initializes the table if it doesn't exist. Supports types like <code>"vip"</code>, <code>"vvip"</code>, <code>"mvp"</code>, etc.</p>
-    <code>
-api.createPremiumRank("vip");
-api.createPremiumRank("vvip");
-    </code>
-  </div>
-
-  <div class="block">
-    <h2>🔍 Get Player's Premium Rank</h2>
-    <p>Returns the numeric rank of a player for a specific rank type.</p>
-    <code>
+MCEnginePremiumApi api = MCEnginePremiumApi.getApi();<br>
 String uuid = "player-uuid";<br>
 int vipRank = api.getPremiumRank(uuid, "vip");<br>
 int vvipRank = api.getPremiumRank(uuid, "vvip");
@@ -92,11 +66,14 @@ int vvipRank = api.getPremiumRank(uuid, "vvip");
   </div>
 
   <div class="block">
-    <h2>⬆️ Upgrade Player's Rank</h2>
-    <p>Increases the player's rank by 1 in the given rank type.</p>
+    <h2>⬆️ upgradePremiumRank(String uuid, String rankType)</h2>
+    <p>Increases the player’s rank level by 1 for the given rank type.</p>
+    <p><strong>Usage:</strong></p>
     <code>
-api.upgradePremiumRank("player-uuid", "vip");<br>
-api.upgradePremiumRank("player-uuid", "vvip");
+MCEnginePremiumApi api = MCEnginePremiumApi.getApi();<br>
+String uuid = "player-uuid";<br>
+api.upgradePremiumRank(uuid, "vip");<br>
+api.upgradePremiumRank(uuid, "vvip");
     </code>
   </div>
 
